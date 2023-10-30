@@ -22,11 +22,14 @@ public class User {
 
     private String lastName;
 
-    public User(String username, String password, String firstName, String lastName) {
+    private String roles;
+
+    public User(String username, String password, String firstName, String lastName, String roles) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.roles = roles;
     }
 
     public User() {
@@ -79,5 +82,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }

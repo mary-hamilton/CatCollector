@@ -1,8 +1,6 @@
 package justrosa.catcollector.domain.dto;
 
-public class UserDTO {
-
-    private Integer id;
+public class SignupDTO {
 
     private String username;
 
@@ -11,16 +9,6 @@ public class UserDTO {
     private String firstName;
 
     private String lastName;
-
-    private String roles;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -50,15 +38,7 @@ public class UserDTO {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastNamw(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
     }
 }
