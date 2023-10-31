@@ -56,7 +56,7 @@ public class User {
         userDTO.setUsername(this.username);
         userDTO.setFirstName(this.firstName);
         userDTO.setLastName(this.lastName);
-        userDTO.setCats(this.cats.stream().map(Cat::getId).collect(Collectors.toSet()));
+        userDTO.setCats(this.cats.stream().map(Cat::getPrimaryName).collect(Collectors.toList()));
         return userDTO;
     }
 

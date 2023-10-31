@@ -52,11 +52,11 @@ public class UserService {
             int userID = Integer.parseInt(user);
             User foundUser = userRepository.findById(userID)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
-            return foundUser.dto();
+            return foundUser.dtoWithCats();
         } else {
             User foundUser = userRepository.findUserByUsername(user)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
-            return foundUser.dto();
+            return foundUser.dtoWithCats();
         }
     }
 }

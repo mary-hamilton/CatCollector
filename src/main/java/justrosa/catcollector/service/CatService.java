@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 @Transactional
 public class CatService {
 
-    private CatRepository catRepository;
+    private final CatRepository catRepository;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public CatService(CatRepository catRepository, UserRepository userRepository) {
         this.catRepository = catRepository;
@@ -28,9 +28,10 @@ public class CatService {
     public CatDTO addCat(String username, CatDTO catDTO) {
         User collector = userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
-        if (collector.getCats().stream().noneMatch(cat -> cat.getPrimaryName() == catDTO.getPrimaryName())) {
+        if (collector.getCats().stream().noneMatch(cat -> cat.getPrimaryName().equals(catDTO.getPrimaryName()))) {
             Cat newCat = new Cat(catDTO.getPrimaryName(), catDTO.getCoatColours(), catDTO.getCoatLength(), collector, catDTO.getSpottedLocations());
             return catRepository.save(newCat).dto();
+
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cat name not available");
         }
