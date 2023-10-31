@@ -44,7 +44,7 @@ public class AuthService {
         userRepository.save(newUser);
         AuthUserDetails userDetails = (AuthUserDetails) authUserDetailsService.loadUserByUsername(newUser.getUsername());
         String jwt = jwtService.generateToken(userDetails);
-        return new AuthSuccessDTO(newUser.dto(), jwt);
+        return new AuthSuccessDTO(userDetails.getUser().dto(), jwt);
     }
 
     public AuthSuccessDTO login(Authentication authentication) {
