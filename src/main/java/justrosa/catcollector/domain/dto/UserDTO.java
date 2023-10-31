@@ -2,7 +2,9 @@ package justrosa.catcollector.domain.dto;
 
 import justrosa.catcollector.domain.Cat;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserDTO {
@@ -19,7 +21,7 @@ public class UserDTO {
 
     private String roles;
 
-    private Set<Integer> cats = new HashSet<>();
+    private List<String> cats = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -69,11 +71,11 @@ public class UserDTO {
         this.roles = roles;
     }
 
-    public Set<Integer> getCats() {
+    public List<String> getCats() {
         return cats;
     }
 
-    public void setCats(Set<Integer> cats) {
+    public void setCats(List<String> cats) {
         this.cats = cats;
     }
 }

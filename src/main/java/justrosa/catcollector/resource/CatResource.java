@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/cats")
 public class CatResource {
 
-    private CatService catService;
+    private final CatService catService;
 
     public CatResource(CatService catService) {
         this.catService = catService;
