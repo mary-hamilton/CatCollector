@@ -1,7 +1,10 @@
-package justrosa.catcollector.domain;
+package justrosa.catcollector.domain.dto;
 
-import jakarta.persistence.*;
-import justrosa.catcollector.domain.dto.CatDTO;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.ManyToOne;
+import justrosa.catcollector.domain.User;
 import justrosa.catcollector.domain.enums.CoatColours;
 import justrosa.catcollector.domain.enums.CoatLength;
 import justrosa.catcollector.domain.utility.Coordinates;
@@ -11,55 +14,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-public class Cat {
+public class CatDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String primaryName;
 
-    @ElementCollection
     private List<String> names = new ArrayList<>();
 
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
     private List<CoatColours> coatColours = new ArrayList<>();
 
     private CoatLength coatLength;
 
-    @ManyToOne
-    private User collector;
-
+    private String collectorUsername;
     private int timesSpotted;
-
-    @ElementCollection
     private List<Coordinates> spottedLocations = new ArrayList<>();
-
-    public Cat(String primaryName, List<CoatColours> coatColours, CoatLength coatLength, User collector, List<Coordinates> spottedLocations) {
-        this.primaryName = primaryName;
-        this.coatColours = coatColours;
-        this.coatLength = coatLength;
-        this.collector = collector;
-        this.spottedLocations = spottedLocations;
-    }
-
-    public Cat() {
-    }
-
-    public CatDTO dto() {
-        CatDTO catDTO = new CatDTO();
-        catDTO.setId(this.id);
-        catDTO.setPrimaryName(this.primaryName);
-        catDTO.setNames(this.names);
-        catDTO.setCoatColours(this.coatColours);
-        catDTO.setCoatLength(this.coatLength);
-        catDTO.setCollectorUsername(this.collector.getUsername());
-        catDTO.setTimesSpotted(this.timesSpotted);
-        catDTO.setSpottedLocations(this.spottedLocations);
-        return catDTO;
-    }
 
     public Integer getId() {
         return id;
@@ -101,12 +70,12 @@ public class Cat {
         this.coatLength = coatLength;
     }
 
-    public User getCollector() {
-        return collector;
+    public String getCollectorUsername() {
+        return collectorUsername;
     }
 
-    public void setCollector(User collector) {
-        this.collector = collector;
+    public void setCollectorUsername(String collectorUsername) {
+        this.collectorUsername = collectorUsername;
     }
 
     public int getTimesSpotted() {

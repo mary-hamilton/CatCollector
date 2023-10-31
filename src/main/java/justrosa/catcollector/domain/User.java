@@ -3,7 +3,11 @@ package justrosa.catcollector.domain;
 import jakarta.persistence.*;
 import justrosa.catcollector.domain.dto.UserDTO;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 // The annotations in here are Hibernate annotations
 @Entity
@@ -24,7 +28,7 @@ public class User {
     private String roles;
 
     @OneToMany(mappedBy = "collector")
-    private List<Cat> cats;
+    private Set<Cat> cats = new HashSet<>();
 
     public User(String username, String password, String firstName, String lastName, String roles) {
         this.username = username;
@@ -43,6 +47,16 @@ public class User {
         userDTO.setUsername(this.username);
         userDTO.setFirstName(this.firstName);
         userDTO.setLastName(this.lastName);
+        return userDTO;
+    }
+
+    public UserDTO dtoWithCats() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(this.id);
+        userDTO.setUsername(this.username);
+        userDTO.setFirstName(this.firstName);
+        userDTO.setLastName(this.lastName);
+        userDTO.setCats(this.cats.stream().map(Cat::getId).collect(Collectors.toSet()));
         return userDTO;
     }
 
@@ -92,5 +106,13 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public Set<Cat> getCats() {
+        return cats;
+    }
+
+    public void setCats(Set<Cat> cats) {
+        this.cats = cats;
     }
 }
