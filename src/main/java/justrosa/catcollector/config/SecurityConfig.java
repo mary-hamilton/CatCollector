@@ -46,7 +46,6 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeRequests()
                 .requestMatchers("/error**").permitAll()
-//                .requestMatchers("/api/users/add").permitAll()
                 .requestMatchers("/api/auth/signup").permitAll()
                 .requestMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated().and()

@@ -1,10 +1,9 @@
 package justrosa.catcollector.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import justrosa.catcollector.domain.dto.UserDTO;
+
+import java.util.List;
 
 // The annotations in here are Hibernate annotations
 @Entity
@@ -23,6 +22,9 @@ public class User {
     private String lastName;
 
     private String roles;
+
+    @OneToMany(mappedBy = "collector")
+    private List<Cat> cats;
 
     public User(String username, String password, String firstName, String lastName, String roles) {
         this.username = username;
