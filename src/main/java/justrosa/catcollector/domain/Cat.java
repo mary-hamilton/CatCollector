@@ -6,10 +6,8 @@ import justrosa.catcollector.domain.enums.CoatColours;
 import justrosa.catcollector.domain.enums.CoatLength;
 import justrosa.catcollector.domain.utility.Coordinates;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Cat {
@@ -20,12 +18,14 @@ public class Cat {
 
     private String primaryName;
 
+    private String concatId;
+
     @ElementCollection
-    private List<String> names = new ArrayList<>();
+    private List<String> names;
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    private List<CoatColours> coatColours = new ArrayList<>();
+    private List<CoatColours> coatColours;
 
     private CoatLength coatLength;
 
@@ -35,7 +35,7 @@ public class Cat {
     private int timesSpotted;
 
     @ElementCollection
-    private List<Coordinates> spottedLocations = new ArrayList<>();
+    private List<Coordinates> spottedLocations;
 
     public Cat(String primaryName, List<CoatColours> coatColours, CoatLength coatLength, User collector, List<Coordinates> spottedLocations) {
         this.primaryName = primaryName;
@@ -52,12 +52,18 @@ public class Cat {
         CatDTO catDTO = new CatDTO();
         catDTO.setId(this.id);
         catDTO.setPrimaryName(this.primaryName);
+        catDTO.setConcatId(this.concatId);
         catDTO.setNames(this.names);
         catDTO.setCoatColours(this.coatColours);
         catDTO.setCoatLength(this.coatLength);
-        catDTO.setCollectorUsername(this.collector.getUsername());
         catDTO.setTimesSpotted(this.timesSpotted);
         catDTO.setSpottedLocations(this.spottedLocations);
+        return catDTO;
+    }
+
+    public CatDTO dtoWithCollector() {
+        CatDTO catDTO = this.dto();
+        catDTO.setCollector(this.collector.dto());
         return catDTO;
     }
 
@@ -75,6 +81,14 @@ public class Cat {
 
     public void setPrimaryName(String primaryName) {
         this.primaryName = primaryName;
+    }
+
+    public String getConcatId() {
+        return concatId;
+    }
+
+    public void setConcatId(String concatId) {
+        this.concatId = concatId;
     }
 
     public List<String> getNames() {

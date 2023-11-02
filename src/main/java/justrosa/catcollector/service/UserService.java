@@ -3,6 +3,7 @@ package justrosa.catcollector.service;
 import justrosa.catcollector.domain.User;
 import justrosa.catcollector.domain.dto.UserDTO;
 import justrosa.catcollector.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 // the database in a stable state or else be entirely rolled back.
 @Transactional
 public class UserService {
+
 
     private final UserRepository userRepository;
 
