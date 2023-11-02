@@ -21,7 +21,7 @@ public class UserDTO {
 
     private String roles;
 
-    private List<String> cats = new ArrayList<>();
+    private List<CatDTO> cats = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -71,11 +71,11 @@ public class UserDTO {
         this.roles = roles;
     }
 
-    public List<String> getCats() {
+    public List<CatDTO> getCats() {
         return cats;
     }
 
-    public void setCats(List<String> cats) {
+    public void setCats(List<CatDTO> cats) {
         this.cats = cats;
     }
 }
