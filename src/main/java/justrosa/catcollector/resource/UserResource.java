@@ -47,6 +47,7 @@ public class UserResource {
     }
 
     @GetMapping("/{user}")
+
     public ResponseEntity<UserDTO> getUser(@PathVariable("user") String user) {
         UserDTO foundUser = userService.getUser(user);
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
