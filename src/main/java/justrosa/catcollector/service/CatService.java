@@ -40,9 +40,13 @@ public class CatService {
     }
 
     public CatDTO getCat(JwtAuthenticationToken principal, String catName) {
-        // check if the user owns the cat (OR is an admin)
-        //if so, get the cat data out of the database
-        //so can we just pull the collector ID using one of the 18 repository methods?
+        //should I put something in here just to check the user hasn't been deleted? Would require another
+        //database call, not sure if that's bad or not
+
+        //did I need to do any of this?? could I just have handled it all with ID? Under what circumstances
+        //will the user actually be requesting a specific cat? If only from a list of already loaded cats
+        //then the IDs will be available. I mean it does make the URL look nicer...
+
         String concatId = principal.getName() + catName;
          Cat foundCat = catRepository.findCatByConcatId(concatId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cat not found"));
