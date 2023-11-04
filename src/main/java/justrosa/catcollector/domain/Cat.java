@@ -18,8 +18,6 @@ public class Cat {
 
     private String primaryName;
 
-    private String concatId;
-
     @ElementCollection
     private List<String> names;
 
@@ -52,7 +50,6 @@ public class Cat {
         CatDTO catDTO = new CatDTO();
         catDTO.setId(this.id);
         catDTO.setPrimaryName(this.primaryName);
-        catDTO.setConcatId(this.concatId);
         catDTO.setNames(this.names);
         catDTO.setCoatColours(this.coatColours);
         catDTO.setCoatLength(this.coatLength);
@@ -63,7 +60,7 @@ public class Cat {
 
     public CatDTO dtoWithCollector() {
         CatDTO catDTO = this.dto();
-        catDTO.setCollector(this.collector.dto());
+        catDTO.setCollectorUsername(this.collector.getUsername());
         return catDTO;
     }
 
@@ -81,14 +78,6 @@ public class Cat {
 
     public void setPrimaryName(String primaryName) {
         this.primaryName = primaryName;
-    }
-
-    public String getConcatId() {
-        return concatId;
-    }
-
-    public void setConcatId(String concatId) {
-        this.concatId = concatId;
     }
 
     public List<String> getNames() {

@@ -1,5 +1,6 @@
 package justrosa.catcollector.service;
 
+import justrosa.catcollector.domain.Cat;
 import justrosa.catcollector.domain.User;
 import justrosa.catcollector.domain.dto.UserDTO;
 import justrosa.catcollector.repository.UserRepository;
@@ -32,6 +33,11 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
     // business logic in here
     public List<UserDTO> getAllUsers() {
         return userRepository
@@ -43,8 +49,7 @@ public class UserService {
 
     public UserDTO addUser(UserDTO userToAddDTO) {
         User userToAdd = new User(userToAddDTO.getUsername(), passwordEncoder.encode(userToAddDTO.getPassword()), userToAddDTO.getFirstName(), userToAddDTO.getLastName(), userToAddDTO.getRoles());
-        UserDTO savedUser = userRepository.save(userToAdd).dto();
-        return savedUser;
+        return userRepository.save(userToAdd).dto();
     }
 
     public UserDTO getUser(String user) {

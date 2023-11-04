@@ -28,18 +28,12 @@ public class UserResource {
         this.userService = userService;
     }
 
-    // I need my HTTP endpoints in here
-
-    // one to get all the users out of the database
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> allUsers = userService.getAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    // one to add a user to the database
-    // here we have to get our data to save our of the http request body, we do this using
-    // an annotation in the parameters
     @PostMapping("/add")
     public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userToAddDTO) {
         UserDTO addedUser =  userService.addUser(userToAddDTO);
@@ -47,7 +41,6 @@ public class UserResource {
     }
 
     @GetMapping("/{user}")
-
     public ResponseEntity<UserDTO> getUser(@PathVariable("user") String user) {
         UserDTO foundUser = userService.getUser(user);
         return new ResponseEntity<>(foundUser, HttpStatus.OK);

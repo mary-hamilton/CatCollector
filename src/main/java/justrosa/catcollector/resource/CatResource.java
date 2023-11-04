@@ -24,7 +24,7 @@ public class CatResource {
 
     @PostMapping("/add")
     public ResponseEntity<CatDTO> addCat(JwtAuthenticationToken principal, @RequestBody CatDTO catDTO) {
-        CatDTO addedCatDTO = catService.addCat(principal.getName(), catDTO);
+        CatDTO addedCatDTO = catService.addCat(principal, catDTO);
         return new ResponseEntity<>(addedCatDTO, HttpStatus.CREATED);
     }
 
@@ -45,5 +45,11 @@ public class CatResource {
     public ResponseEntity<List<CatDTO>> getAllTheCats() {
         List<CatDTO> allTheCats = catService.getAllTheCats();
         return new ResponseEntity<>(allTheCats, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{catID}/edit")
+    public ResponseEntity<CatDTO> editCat(JwtAuthenticationToken principal, @PathVariable("catID") Integer catID, @RequestBody CatDTO catDTO) {
+        CatDTO editedCatDTO = catService.editCat(principal, catID, catDTO);
+        return new ResponseEntity<>(editedCatDTO, HttpStatus.OK);
     }
 }
