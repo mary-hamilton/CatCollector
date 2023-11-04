@@ -10,5 +10,4 @@ import java.util.Optional;
 
 @Repository
 public interface CatRepository extends JpaRepository<Cat, Integer> {
-    Optional<Cat> findCatByConcatId(String concatId);
 }

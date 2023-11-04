@@ -1,5 +1,6 @@
 package justrosa.catcollector.domain.dto;
 
+import justrosa.catcollector.domain.Cat;
 import justrosa.catcollector.domain.enums.CoatColours;
 import justrosa.catcollector.domain.enums.CoatLength;
 import justrosa.catcollector.domain.utility.Coordinates;
@@ -12,18 +13,16 @@ public class CatDTO {
     private Integer id;
 
     private String primaryName;
-
-    private String concatId;
-
     private List<String> names = new ArrayList<>();
 
     private List<CoatColours> coatColours = new ArrayList<>();
 
     private CoatLength coatLength;
 
-    private UserDTO collector;
+    private String collectorUsername;
     private int timesSpotted;
     private List<Coordinates> spottedLocations = new ArrayList<>();
+
 
     public Integer getId() {
         return id;
@@ -39,14 +38,6 @@ public class CatDTO {
 
     public void setPrimaryName(String primaryName) {
         this.primaryName = primaryName;
-    }
-
-    public String getConcatId() {
-        return concatId;
-    }
-
-    public void setConcatId(String concatId) {
-        this.concatId = concatId;
     }
 
     public List<String> getNames() {
@@ -73,12 +64,12 @@ public class CatDTO {
         this.coatLength = coatLength;
     }
 
-    public UserDTO getCollector() {
-        return collector;
+    public String getCollectorUsername() {
+        return collectorUsername;
     }
 
-    public void setCollector(UserDTO collector) {
-        this.collector = collector;
+    public void setCollectorUsername(String collectorUsername) {
+        this.collectorUsername = collectorUsername;
     }
 
     public int getTimesSpotted() {
