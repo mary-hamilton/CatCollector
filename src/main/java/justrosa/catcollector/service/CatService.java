@@ -68,26 +68,7 @@ public class CatService {
     }
 
     public CatDTO getCat(JwtAuthenticationToken principal, Integer catID) {
-        //should I put something in here just to check the user hasn't been deleted? Would require another
-        //database call, not sure if that's bad or not
 
-        //did I need to do any of this?? could I just have handled it all with ID? Under what circumstances
-        //will the user actually be requesting a specific cat? If only from a list of already loaded cats
-        //then the IDs will be available. I mean it does make the URL look nicer...
-
-        //sadly I do need to do this with ID. A learning experience!
-
-//        String concatId = principal.getName() + catName;
-//         Cat foundCat = catRepository.findCatByConcatId(concatId)
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cat not found"));
-//         if(principal.getName().equals(foundCat.getCollector().getUsername()) ||
-//                 principal.getAuthorities()
-//                 .stream()
-//                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"))) {
-//            return foundCat.dto();
-//         } else {
-//             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied");
-//         }
         if (!userRepository.existsUserByUsername(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
         }
@@ -135,6 +116,13 @@ public class CatService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied");
         }
         return catRepository.save(catToEdit).dto();
+    }
+
+    public void deleteCat(JwtAuthenticationToken principal, Integer catID) {
+        Cat foundCat = findCatById(catID);
+        if(ownerOrAdmin(principal, foundCat)) {
+            catRepository.delete(foundCat);
+        }
     }
 
 }

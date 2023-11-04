@@ -3,7 +3,6 @@ package justrosa.catcollector.resource;
 import justrosa.catcollector.domain.dto.CatDTO;
 import justrosa.catcollector.service.CatService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -51,5 +50,12 @@ public class CatResource {
     public ResponseEntity<CatDTO> editCat(JwtAuthenticationToken principal, @PathVariable("catID") Integer catID, @RequestBody CatDTO catDTO) {
         CatDTO editedCatDTO = catService.editCat(principal, catID, catDTO);
         return new ResponseEntity<>(editedCatDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{catID}/delete")
+    public ResponseEntity<String> deleteCat(JwtAuthenticationToken principal, @PathVariable("catID") Integer catID) {
+        catService.deleteCat(principal, catID);
+        // have not used HttpStatus.NO_CONTENT because then you don't get a response body back
+        return new ResponseEntity<>("Cat deleted successfully.", HttpStatus.OK);
     }
 }

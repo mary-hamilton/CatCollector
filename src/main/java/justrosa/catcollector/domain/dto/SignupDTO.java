@@ -38,7 +38,7 @@ public class SignupDTO {
         return lastName;
     }
 
-    public void setLastNamw(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 }
